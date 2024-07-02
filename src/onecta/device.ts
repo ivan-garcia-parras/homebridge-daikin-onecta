@@ -7,6 +7,8 @@ export class DaikinCloudDevice {
     desc: any;
     managementPoints: Record<string, any>;
 
+    private latestUpdateData: number = 0;
+
     /**
      * Constructor, called from DaikinCloud class when initializing all devices
      *
@@ -158,9 +160,12 @@ export class DaikinCloudDevice {
      * @returns {Promise<boolean>}
      */
     async updateData() {
-        // TODO: Enhance this method to also allow to get some partial data like only one managementPoint or such; needs checking how to request
-        const desc = await this.client.doBearerRequest('/v1/gateway-devices/' + this.getId(), null, false);
-        this.setDescription(desc);
+        if (this.latestUpdateData == 0 || (this.latestUpdateData != 0 && Date.now() - this.latestUpdateData >= 5000)) {
+            const desc = await this.client.doBearerRequest('/v1/gateway-devices/' + this.getId(), null, false);
+            this.setDescription(desc);
+
+            this.latestUpdateData = Date.now();
+        }
         return true;
     }
 
