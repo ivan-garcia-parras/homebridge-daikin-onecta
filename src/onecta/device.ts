@@ -234,6 +234,6 @@ export class DaikinCloudDevice {
             method: 'PATCH',
             body: JSON.stringify(setBody)
         } as const;
-        return this.client.doBearerRequest(setPath, setOptions, false);
+        return await this.client.doBearerRequest(setPath, setOptions, false);
     }
 }
