@@ -5,6 +5,7 @@ export declare class DaikinCloudDevice {
     client: any;
     desc: any;
     managementPoints: Record<string, any>;
+    private latestUpdateData;
     /**
      * Constructor, called from DaikinCloud class when initializing all devices
      *
