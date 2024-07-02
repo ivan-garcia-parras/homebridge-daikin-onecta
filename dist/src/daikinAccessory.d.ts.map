@@ -1,0 +1,1 @@
+{"version":3,"file":"daikinAccessory.d.ts","sourceRoot":"","sources":["../../src/daikinAccessory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,iBAAiB,EAAC,MAAM,YAAY,CAAC;AAC7C,OAAO,EAAC,mBAAmB,EAAC,MAAM,YAAY,CAAC;AAE/C,qBAAa,eAAe;IACxB,QAAQ,CAAC,QAAQ,EAAE,mBAAmB,CAAC;IACvC,QAAQ,CAAC,SAAS,EAAE,iBAAiB,CAAC;gBAElC,QAAQ,EAAE,mBAAmB,EAC7B,SAAS,EAAE,iBAAiB;IAahC,eAAe;CAUlB"}

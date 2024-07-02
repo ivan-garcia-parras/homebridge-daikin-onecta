@@ -1,0 +1,46 @@
+import { PlatformAccessory, CharacteristicValue } from 'homebridge';
+import { DaikinCloudPlatform } from './platform';
+import { daikinAccessory } from './daikinAccessory';
+export declare class daikinAirConditioningAccessory extends daikinAccessory {
+    private extraServices;
+    private readonly name;
+    private service;
+    private switchServicePowerfulMode;
+    private switchServiceEconoMode;
+    private switchServiceStreamerMode;
+    private switchServiceOutdoorSilentMode;
+    private switchServiceIndoorSilentMode;
+    constructor(platform: DaikinCloudPlatform, accessory: PlatformAccessory);
+    handleActiveStateGet(): Promise<CharacteristicValue>;
+    handleActiveStateSet(value: CharacteristicValue): Promise<void>;
+    handleCurrentTemperatureGet(): Promise<CharacteristicValue>;
+    handleCoolingThresholdTemperatureGet(): Promise<CharacteristicValue>;
+    handleCoolingThresholdTemperatureSet(value: CharacteristicValue): Promise<void>;
+    handleRotationSpeedGet(): Promise<CharacteristicValue>;
+    handleRotationSpeedSet(value: CharacteristicValue): Promise<void>;
+    handleHeatingThresholdTemperatureGet(): Promise<CharacteristicValue>;
+    handleHeatingThresholdTemperatureSet(value: CharacteristicValue): Promise<void>;
+    handleTargetHeaterCoolerStateGet(): Promise<CharacteristicValue>;
+    handleTargetHeaterCoolerStateSet(value: CharacteristicValue): Promise<void>;
+    handleSwingModeSet(value: CharacteristicValue): Promise<void>;
+    handleSwingModeGet(): Promise<CharacteristicValue>;
+    handlePowerfulModeGet(): Promise<boolean>;
+    handlePowerfulModeSet(value: CharacteristicValue): Promise<void>;
+    handleEconoModeGet(): Promise<boolean>;
+    handleEconoModeSet(value: CharacteristicValue): Promise<void>;
+    handleStreamerModeGet(): Promise<boolean>;
+    handleStreamerModeSet(value: CharacteristicValue): Promise<void>;
+    handleOutdoorSilentModeGet(): Promise<boolean>;
+    handleOutdoorSilentModeSet(value: CharacteristicValue): Promise<void>;
+    handleIndoorSilentModeGet(): Promise<boolean>;
+    handleIndoorSilentModeSet(value: CharacteristicValue): Promise<void>;
+    getCurrentOperationMode(): any;
+    hasSwingModeFeature(): boolean;
+    hasPowerfulModeFeature(): boolean;
+    hasEconoModeFeature(): boolean;
+    hasStreamerModeFeature(): boolean;
+    hasOutdoorSilentModeFeature(): boolean;
+    hasIndoorSilentModeFeature(): boolean;
+}
+export type DaikinClimateControlEmbeddedId = 'climateControl' | 'climateControlMainZone';
+//# sourceMappingURL=daikinAirConditioningAccessory.d.ts.map

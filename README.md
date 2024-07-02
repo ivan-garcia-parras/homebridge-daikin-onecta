@@ -1,1 +1,1 @@
-# homebridge-daikin-onecta
+# Homebridge Daikin Onecta plugin
