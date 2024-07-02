@@ -150,6 +150,7 @@ class daikinAirConditioningAccessory extends daikinAccessory_1.daikinAccessory {
                 accessory.removeService(this.switchServiceIndoorSilentMode);
             }
         }
+        this.accessory.context.device.updateData();
     }
     async handleActiveStateGet() {
         await this.accessory.context.device.updateData();
