@@ -159,7 +159,7 @@ export class DaikinCloudDevice {
      */
     async updateData() {
         // TODO: Enhance this method to also allow to get some partial data like only one managementPoint or such; needs checking how to request
-        const desc = await this.client.requestResource('/v1/gateway-devices/' + this.getId());
+        const desc = await this.client.doBearerRequest('/v1/gateway-devices/' + this.getId(), null, false);
         this.setDescription(desc);
         return true;
     }
@@ -234,8 +234,6 @@ export class DaikinCloudDevice {
             method: 'PATCH',
             body: JSON.stringify(setBody)
         } as const;
-        return this.client.requestResource(setPath, setOptions);
+        return this.client.doBearerRequest(setPath, setOptions, false);
     }
 }
-
-module.exports = DaikinCloudDevice;
