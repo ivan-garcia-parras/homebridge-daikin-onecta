@@ -26,14 +26,14 @@ class DaikinCloudController extends events_1.EventEmitter {
      * @returns {Promise<Object>} API Info object
      */
     async getApiInfo() {
-        return this.doBearerRequest('/v1/info', null, false);
+        return await this.doBearerRequest('/v1/info', null, false);
     }
     /**
      * Get pure Device Data from the Daikin cloud devices
      * @returns {Promise<Object>} pure Device details
      */
     async getCloudDeviceDetails() {
-        return this.doBearerRequest('/v1/gateway-devices', null, false);
+        return await this.doBearerRequest('/v1/gateway-devices', null, false);
     }
     /**
      * Get array of DaikinCloudDevice objects to interact with the device and get data
@@ -63,7 +63,7 @@ class DaikinCloudController extends events_1.EventEmitter {
         }
         if (!refreshed && fetchResponse.status === 401) { // Refresh needed
             await this.refreshAccessToken();
-            return this.doBearerRequest(resourceUrl, extraOptions, true);
+            return await this.doBearerRequest(resourceUrl, extraOptions, true);
         }
         const err = new Error(`Call to ONECTA Cloud API failed with status [${fetchResponse.status}], response: ${JSON.stringify(await fetchResponse.json(), null, 4)}`);
         throw err;
