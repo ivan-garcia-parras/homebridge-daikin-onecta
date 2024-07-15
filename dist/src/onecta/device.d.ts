@@ -68,7 +68,7 @@ export declare class DaikinCloudDevice {
      *
      * @returns {Promise<boolean>}
      */
-    updateData(): Promise<boolean>;
+    updateData(forceUpdate: Boolean): Promise<boolean>;
     /**
      * Validates a value that should be sent to the Daikin Device
      *

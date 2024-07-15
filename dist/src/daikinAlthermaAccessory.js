@@ -68,7 +68,7 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
             .onSet(this.handleHotWaterTankTargetHeaterCoolerStateSet.bind(this));
     }
     async handleActiveStateGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const state = this.accessory.context.device.getData('climateControlMainZone', 'onOffMode').value;
         this.platform.log.debug(`[${this.name}] GET ActiveState, state: ${state}`);
         return state === DaikinOnOffModes.ON;
@@ -77,22 +77,22 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         this.platform.log.debug(`[${this.name}] SET ActiveState, state: ${value}`);
         const state = value;
         await this.accessory.context.device.setData('climateControlMainZone', 'onOffMode', state ? DaikinOnOffModes.ON : DaikinOnOffModes.OFF);
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(true);
     }
     async handleCurrentTemperatureGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const temperature = this.accessory.context.device.getData('climateControlMainZone', 'sensoryData', '/roomTemperature').value;
         this.platform.log.debug(`[${this.name}] GET CurrentTemperature, temperature: ${temperature}`);
         return temperature;
     }
     async handleHotWaterTankCurrentTemperatureGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const temperature = this.accessory.context.device.getData('domesticHotWaterTank', 'sensoryData', '/tankTemperature').value;
         this.platform.log.debug(`[${this.name}] GET CurrentTemperature for hot water tank, temperature: ${temperature}`);
         return temperature;
     }
     async handleTargetHeaterCoolerStateGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const operationMode = this.accessory.context.device.getData('climateControlMainZone', 'operationMode').value;
         this.platform.log.debug(`[${this.name}] GET TargetHeaterCoolerState, operationMode: ${operationMode}`);
         switch (operationMode) {
@@ -122,10 +122,10 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         this.platform.log.debug(`[${this.name}] SET TargetHeaterCoolerState, daikinOperationMode to: ${daikinOperationMode}`);
         await this.accessory.context.device.setData('climateControlMainZone', 'operationMode', daikinOperationMode);
         await this.accessory.context.device.setData('climateControlMainZone', 'onOffMode', DaikinOnOffModes.ON);
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(true);
     }
     async handleCoolingThresholdTemperatureGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const temperature = this.accessory.context.device.getData('climateControlMainZone', 'temperatureControl', '/operationModes/cooling/setpoints/roomTemperature').value;
         this.platform.log.debug(`[${this.name}] GET CoolingThresholdTemperature, temperature: ${temperature}`);
         return temperature;
@@ -134,10 +134,10 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         const temperature = Math.round(value * 2) / 2;
         this.platform.log.debug(`[${this.name}] SET CoolingThresholdTemperature, temperature to: ${temperature}`);
         await this.accessory.context.device.setData('climateControlMainZone', 'temperatureControl', '/operationModes/cooling/setpoints/roomTemperature', temperature);
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(true);
     }
     async handleHeatingThresholdTemperatureGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const temperature = this.accessory.context.device.getData('climateControlMainZone', 'temperatureControl', '/operationModes/heating/setpoints/roomTemperature').value;
         this.platform.log.debug(`[${this.name}] GET HeatingThresholdTemperature, temperature: ${temperature}`);
         return temperature;
@@ -146,10 +146,10 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         const temperature = Math.round(value * 2) / 2;
         this.platform.log.debug(`[${this.name}] SET HeatingThresholdTemperature, temperature to: ${temperature}`);
         await this.accessory.context.device.setData('climateControlMainZone', 'temperatureControl', '/operationModes/heating/setpoints/roomTemperature', temperature);
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(true);
     }
     async handleHotWaterTankHeatingTargetTemperatureGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const temperature = this.accessory.context.device.getData('domesticHotWaterTank', 'temperatureControl', '/operationModes/heating/setpoints/domesticHotWaterTemperature').value;
         this.platform.log.debug(`[${this.name}] GET HeatingThresholdTemperature domesticHotWaterTank, temperature: ${temperature}`);
         return temperature;
@@ -158,10 +158,10 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         const temperature = Math.round(value * 2) / 2;
         this.platform.log.debug(`[${this.name}] SET HeatingThresholdTemperature domesticHotWaterTank, temperature to: ${temperature}`);
         await this.accessory.context.device.setData('domesticHotWaterTank', 'temperatureControl', '/operationModes/heating/setpoints/domesticHotWaterTemperature', temperature);
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(true);
     }
     async handleHotWaterTankTargetHeaterCoolerStateGet() {
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(false);
         const operationMode = this.accessory.context.device.getData('domesticHotWaterTank', 'operationMode').value;
         this.platform.log.debug(`[${this.name}] GET TargetHeaterCoolerState, operationMode: ${operationMode}`);
         switch (operationMode) {
@@ -179,7 +179,7 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         let daikinOperationMode = DaikinOperationModes.COOLING;
         if (operationMode === this.platform.Characteristic.TargetHeatingCoolingState.OFF) {
             await this.accessory.context.device.setData('domesticHotWaterTank', 'onOffMode', DaikinOnOffModes.OFF);
-            await this.accessory.context.device.updateData();
+            await this.accessory.context.device.updateData(true);
             return;
         }
         switch (operationMode) {
@@ -196,7 +196,7 @@ class daikinAlthermaAccessory extends daikinAccessory_1.daikinAccessory {
         this.platform.log.debug(`[${this.name}] SET TargetHeaterCoolerState, daikinOperationMode to: ${daikinOperationMode}`);
         await this.accessory.context.device.setData('domesticHotWaterTank', 'onOffMode', DaikinOnOffModes.ON);
         await this.accessory.context.device.setData('domesticHotWaterTank', 'operationMode', daikinOperationMode);
-        await this.accessory.context.device.updateData();
+        await this.accessory.context.device.updateData(true);
     }
     hasOnlyHeating() {
         const operationModes = this.accessory.context.device.getData('climateControlMainZone', 'operationMode').values;

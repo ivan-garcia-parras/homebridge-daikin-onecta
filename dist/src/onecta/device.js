@@ -151,8 +151,10 @@ class DaikinCloudDevice {
      *
      * @returns {Promise<boolean>}
      */
-    async updateData() {
-        if (this.latestUpdateData == 0 || (this.latestUpdateData != 0 && Date.now() - this.latestUpdateData >= 5000)) {
+    async updateData(forceUpdate) {
+        if (this.latestUpdateData == 0
+            || (this.latestUpdateData != 0 && Date.now() - this.latestUpdateData >= 5000)
+            || forceUpdate == true) {
             this.latestUpdateData = Date.now();
             const desc = await this.client.doBearerRequest('/v1/gateway-devices/' + this.getId(), null, false);
             this.setDescription(desc);
